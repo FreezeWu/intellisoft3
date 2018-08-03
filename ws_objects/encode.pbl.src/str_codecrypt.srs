@@ -1,0 +1,8 @@
+﻿$PBExportHeader$str_codecrypt.srs
+global type str_codecrypt from structure
+	coderobject		code_1
+	coderobject		code_array[]
+	crypterobject		crypt_1
+	crypterobject		crypt_array[]
+end type
+

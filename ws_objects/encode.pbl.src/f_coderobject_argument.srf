@@ -1,0 +1,95 @@
+﻿$PBExportHeader$f_coderobject_argument.srf
+global type f_coderobject_argument from function_object
+end type
+
+forward prototypes
+global function string f_coderobject_argument (coderobject aco_1, ref coderobject aco_2, str_codecrypt astr_1, coderobject aco_array[])
+end prototypes
+
+global function string f_coderobject_argument (coderobject aco_1, ref coderobject aco_2, str_codecrypt astr_1, coderobject aco_array[]);//====================================================================
+// Function: f_coderobject_argument
+//--------------------------------------------------------------------
+// Description:
+//--------------------------------------------------------------------
+// Arguments:
+// 	value        coderobject      aco_1
+// 	reference    coderobject      aco_2
+// 	value        str_codecrypt    astr_1
+// 	value        coderobject      aco_array[]
+//--------------------------------------------------------------------
+// Returns:  string
+//--------------------------------------------------------------------
+// Author:	pang		Date: 2018-03-27
+//--------------------------------------------------------------------
+//	Copyright (c) 2008-2011 appeon, All rights reserved.
+//--------------------------------------------------------------------
+// Modify History:
+//
+//====================================================================
+
+String  ls_Value, ls_return, ls_value2
+CoderObject lco_Code
+
+lco_Code = aco_1
+
+If IsValid ( lco_Code ) Then
+	ls_return += "CoderObject Global Functions: value Argument Success" + "~r~n"
+	ls_Value = lco_Code.HexEncode ( Blob( "Pragma",EncodingANSI! ))
+	If ls_Value = "507261676D61" Then
+		ls_return += "CoderObject Global Functions: HexEncode(Blob('Pragma')) Success" + "~r~n"
+	Else
+		ls_return += "CoderObject Global Functions: HexEncode(Blob('Pragma')) Failed" + "~r~n"
+	End If
+Else
+	ls_return += "CoderObject Global Functions: value Argument Failed" + "~r~n"
+	ls_return += "CoderObject Global Functions: HexEncode(Blob('Pragma')) Failed" + "~r~n"
+End If
+
+If IsValid ( aco_2 ) Then
+	ls_return += "CoderObject Global Functions: reference Argument Success" + "~r~n"
+	ls_Value = aco_2.Base64Encode ( Blob("Pragma",EncodingANSI! ))
+	If ls_Value = "UHJhZ21h" Then
+		ls_return += "CoderObject Global Functions: reference Base64Encode(Blob('Pragma')) Success" + "~r~n"
+	Else
+		ls_return += "CoderObject Global Functions: reference Base64Encode(Blob('Pragma')) Failed" + "~r~n"
+	End If
+Else
+	ls_return+= "CoderObject Global Functions: reference Argument Failed" + "~r~n"
+End If
+
+If UpperBound ( aco_array ) > 0 Then
+	If IsValid ( aco_array[1] ) Then
+		ls_return += "CoderObject Global Functions: Array Argument Success" + "~r~n"
+		ls_Value = aco_array[1].HexEncode ( Blob("Pragma",EncodingANSI! ))
+		If ls_Value = "507261676D61" Then
+			ls_return += "CoderObject Global Functions Array: HexEncode(Blob('Pragma')) Success" + "~r~n"
+		Else
+			ls_return += "CoderObject Global Functions Array: HexEncode(Blob('Pragma')) Failed" + "~r~n"
+		End If
+	Else
+		ls_return += "CoderObject Global Functions: Array Argument Failed" + "~r~n"
+	End If	
+Else	
+	ls_return += "CoderObject Global Functions: Array Argument Failed" + "~r~n"
+End If
+
+If UpperBound ( astr_1.code_array ) > 0 Then
+	If IsValid ( astr_1.code_array[1] ) Then
+		ls_return += "CoderObject Global Functions Structure: Array Argument Success" + "~r~n"
+		ls_value2 = astr_1.code_array[1] .HexEncode ( Blob("Pragma",EncodingANSI! ))
+		If ls_value2 = "507261676D61" Then
+			ls_return += "CoderObject Global Functions Structure: HexEncode(Blob('Pragma')) Success"
+		Else
+			ls_return += "CoderObject Global Functions Structure: HexEncode(Blob('Pragma')) Failed"
+		End If	
+	Else
+		ls_return += "CoderObject Global Functions Structure: Array Argument Failed"
+	End If	
+Else
+	ls_return += "CoderObject Global Functions Structure: Array Argument Failed"
+End If
+
+Return ls_return
+
+end function
+

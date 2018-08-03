@@ -1,0 +1,98 @@
+﻿$PBExportHeader$f_crypterobject_argument.srf
+global type f_crypterobject_argument from function_object
+end type
+
+forward prototypes
+global function string f_crypterobject_argument (crypterobject aco_1, ref crypterobject aco_2, str_codecrypt astr_1, crypterobject aco_array[])
+end prototypes
+
+global function string f_crypterobject_argument (crypterobject aco_1, ref crypterobject aco_2, str_codecrypt astr_1, crypterobject aco_array[]);//====================================================================
+// Function: f_crypterobject_argument
+//--------------------------------------------------------------------
+// Description:
+//--------------------------------------------------------------------
+// Arguments:
+// 	value        crypterobject    aco_1
+// 	reference    crypterobject    aco_2
+// 	value        str_codecrypt    astr_1
+// 	value        crypterobject    aco_array[]
+//--------------------------------------------------------------------
+// Returns:  string
+//--------------------------------------------------------------------
+// Author:	pang		Date: 2018-03-29
+//--------------------------------------------------------------------
+//	Copyright (c) 2008-2011 appeon, All rights reserved.
+//--------------------------------------------------------------------
+// Modify History:
+//
+//====================================================================
+
+String  ls_Value, ls_return, ls_value2
+CrypterObject lco_Crypt
+CoderObject lco_Code
+
+lco_Code = Create CoderObject
+lco_Crypt = aco_1
+
+If IsValid ( lco_Crypt ) Then
+	ls_return += "CrypterObject Global Functions: value Argument Success" + "~r~n"
+	ls_Value = lco_Code.HexEncode ( lco_Crypt.MD5(Blob( "Pragma",EncodingANSI! )))
+	If ls_Value = "F607FDCEA4127AAD4F0CDAE948A4F3F7" Then
+		ls_return += "CrypterObject Global Functions: MD5(Blob('Pragma')) Success" + "~r~n"
+	Else
+		ls_return += "CrypterObject Global Functions: MD5(Blob('Pragma')) Failed" + "~r~n"
+	End If
+Else
+	ls_return += "CrypterObject Global Functions: value Argument Failed" + "~r~n"
+	ls_return += "CrypterObject Global Functions: MD5(Blob('Pragma')) Failed" + "~r~n"
+End If
+
+If IsValid ( aco_2 ) Then
+	ls_return += "CrypterObject Global Functions: reference Argument Success" + "~r~n"
+	ls_Value = lco_Code.HexEncode ( aco_2.MD5 ( Blob("Pragma",EncodingANSI! )))
+	If ls_Value = "F607FDCEA4127AAD4F0CDAE948A4F3F7" Then
+		ls_return += "CrypterObject Global Functions: reference MD5(Blob('Pragma')) Success" + "~r~n"
+	Else
+		ls_return += "CrypterObject Global Functions: reference MD5(Blob('Pragma')) Failed" + "~r~n"
+	End If
+Else
+	ls_return+= "CrypterObject Global Functions: reference Argument Failed" + "~r~n"
+End If
+
+If UpperBound ( aco_array ) > 0 Then
+	If IsValid ( aco_array[1] ) Then
+		ls_return += "CrypterObject Global Functions: Array Argument Success" + "~r~n"
+		ls_Value = lco_Code.HexEncode ( aco_array[1].MD5 ( Blob("Pragma",EncodingANSI! )))
+		If ls_Value = "F607FDCEA4127AAD4F0CDAE948A4F3F7" Then
+			ls_return += "CrypterObject Global Functions Array: MD5(Blob('Pragma')) Success" + "~r~n"
+		Else
+			ls_return += "CrypterObject Global Functions Array: MD5(Blob('Pragma')) Failed" + "~r~n"
+		End If
+	Else
+		ls_return += "CrypterObject Global Functions: Array Argument Failed" + "~r~n"
+	End If	
+Else	
+	ls_return += "CrypterObject Global Functions: Array Argument Failed" + "~r~n"
+End If
+
+If UpperBound ( astr_1.crypt_array ) > 0 Then
+	If IsValid ( astr_1.crypt_array[1] ) Then
+		ls_return += "CrypterObject Global Functions Structure: Array Argument Success" + "~r~n"
+		ls_value2 = lco_Code.HexEncode ( astr_1.crypt_array[1] .MD5 ( Blob("Pragma",EncodingANSI! )))
+		If ls_value2 = "F607FDCEA4127AAD4F0CDAE948A4F3F7" Then
+			ls_return += "CrypterObject Global Functions Structure: MD5(Blob('Pragma')) Success"
+		Else
+			ls_return += "CrypterObject Global Functions Structure: MD5(Blob('Pragma')) Failed"
+		End If	
+	Else
+		ls_return += "CrypterObject Global Functions Structure: Array Argument Failed"
+	End If	
+Else
+	ls_return += "CrypterObject Global Functions Structure: Array Argument Failed" 
+End If
+
+If IsValid ( lco_Code ) Then DesTroy ( lco_Code )
+
+Return ls_return
+end function
+

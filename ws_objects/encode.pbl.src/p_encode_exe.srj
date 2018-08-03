@@ -1,0 +1,19 @@
+﻿$PBExportHeader$p_encode_exe.srj
+$PBExportComments$Generated Application Executable Project
+EXE:encode.exe,,0,1,1
+CMP:0,0,0,3,0,0,1
+COM:Appeon
+DES:Appeon Product File
+CPY:
+PRD:PowerBuilder Enterprise Series
+PVS:1.0.0.1
+PVN:1,0,0,1
+FVS:1.0.0.1
+FVN:1,0,0,1
+MAN:0,asInvoker,0
+PBD:encode.pbl,,1
+PBD:qa_frame.pbl,,1
+OBJ:C:\Users\appeon\Desktop\runtime 64\Encode\encode.pbl,m_frame_encode,m
+OBJ:C:\Users\appeon\Desktop\runtime 64\Encode\encode.pbl,encode,a
+OBJ:C:\Users\appeon\Desktop\runtime 64\Encode\encode.pbl,w_mdi_encode,w
+OBJ:C:\Users\appeon\Desktop\runtime 64\Encode\encode.pbl,str_codecrypt,s

@@ -1,0 +1,8 @@
+Save Format v3.0(19990112)
+@begin Targets
+ 0 "encode.pbt";
+ 1 "encode_scenes.pbt";
+ 2 "test.pbt";
+@end;
+DefaultTarget "encode.pbt";
+DefaultRemoteTarget "encode.pbt";

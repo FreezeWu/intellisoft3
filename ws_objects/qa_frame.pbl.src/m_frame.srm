@@ -1,0 +1,241 @@
+﻿$PBExportHeader$m_frame.srm
+forward
+global type m_frame from menu
+end type
+type m_platform from menu within m_frame
+end type
+type m_pb from menu within m_platform
+end type
+type m_web from menu within m_platform
+end type
+type m_mobile from menu within m_platform
+end type
+type m_platform from menu within m_frame
+m_pb m_pb
+m_web m_web
+m_mobile m_mobile
+end type
+global type m_frame from menu
+m_platform m_platform
+end type
+end forward
+
+global type m_frame from menu
+m_platform m_platform
+end type
+global m_frame m_frame
+
+forward prototypes
+public subroutine mf_openwin (string as_win)
+end prototypes
+
+public subroutine mf_openwin (string as_win);//====================================================================
+// 
+//   event name : mf_openwin
+//
+//   Description:
+//	                打开指定的窗体
+//				   
+//
+//   Argument：
+//				   string  as_win   要打开的窗体名称
+//		          	   
+//
+//   Return ：  (None)
+//
+//   Modify Date：2018-01-31
+//====================================================================
+window lw_win  //要打开的窗体变量
+
+//判断参数的合法性
+if isnull(as_win) or trim(as_win) = '' then
+	return
+end if
+
+//打开窗体
+opensheet(lw_win,as_win,parentwindow,1,original!)
+
+end subroutine
+
+on m_frame.create
+m_frame=this
+call super::create
+this.text = "m_frame"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_platform=create m_platform
+this.Item[UpperBound(this.Item)+1]=this.m_platform
+end on
+
+on m_frame.destroy
+call super::destroy
+destroy(this.m_platform)
+end on
+
+type m_platform from menu within m_frame
+m_pb m_pb
+m_web m_web
+m_mobile m_mobile
+end type
+
+on m_platform.create
+call super::create
+this.text = "PlatForm"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_pb=create m_pb
+this.m_web=create m_web
+this.m_mobile=create m_mobile
+this.Item[UpperBound(this.Item)+1]=this.m_pb
+this.Item[UpperBound(this.Item)+1]=this.m_web
+this.Item[UpperBound(this.Item)+1]=this.m_mobile
+end on
+
+on m_platform.destroy
+call super::destroy
+destroy(this.m_pb)
+destroy(this.m_web)
+destroy(this.m_mobile)
+end on
+
+type m_pb from menu within m_platform
+end type
+
+event clicked;//打开PB的测试点窗体
+string  ls_win
+//给窗体赋值
+//ls_win = "w_test"
+ls_win = "w_base_auto"
+
+//打开窗体
+mf_openwin(ls_win)
+
+
+
+end event
+
+on m_pb.create
+call super::create
+this.text = "PB"
+this.toolbaritemname = "full build workspace_2!"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_pb.destroy
+call super::destroy
+end on
+
+type m_web from menu within m_platform
+end type
+
+on m_web.create
+call super::create
+this.text = "Web"
+this.toolbaritemname = "englishquery!"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_web.destroy
+call super::destroy
+end on
+
+event clicked;//打开web的测试点窗体
+string  ls_win
+//给窗体赋值
+//ls_win = "w_test"
+
+//打开窗体
+mf_openwin(ls_win)
+end event
+
+type m_mobile from menu within m_platform
+end type
+
+on m_mobile.create
+call super::create
+this.text = "Mobile"
+this.toolbaritemname = "custom010!"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_mobile.destroy
+call super::destroy
+end on
+
+event clicked;//打开Mobile的测试点窗体
+string  ls_win
+//给窗体赋值
+//ls_win = "w_test"
+
+//打开窗体
+mf_openwin(ls_win)
+end event
+
